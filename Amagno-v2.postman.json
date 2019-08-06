@@ -1,0 +1,2898 @@
+{
+	"info": {
+		"name": "Amagno Rest API v2",
+		"_postman_id": "27103703-bddf-8748-a8df-5f8165cd6ffd",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [{
+			"name": "Token",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"    var jsonData = pm.response.json();",
+						"    console.log(jsonData);",
+						"    postman.setEnvironmentVariable(\"mytoken\", jsonData);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"method": "POST",
+				"header": [{
+					"key": "Content-Type",
+					"value": "application/json"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"UserName\":\"bw@cleanpower.ag\", \"Password\":\"hannes\"}"
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/token",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"token"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get document tags",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"object is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(Object.keys(jsonData).length).to.eql(6);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/a620363c-bff0-42e1-a634-f2de38c9cb24/tags",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"a620363c-bff0-42e1-a634-f2de38c9cb24",
+						"tags"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get all document tag definitions",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"object is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(Object.keys(jsonData).length).to.eql(6);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [{
+					"key": "Content-Type",
+					"value": "application/json"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/tag-definitions",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"tag-definitions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get vault document tag definitions",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"object is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(Object.keys(jsonData).length).to.eql(6);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/vaults/aef5b699-1583-4c05-9305-8cde4ea61be1/documents/tag-definitions",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"vaults",
+						"aef5b699-1583-4c05-9305-8cde4ea61be1",
+						"documents",
+						"tag-definitions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get vault document tag group definitions",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(14);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/vaults/aef5b699-1583-4c05-9305-8cde4ea61be1/documents/tag-group-definitions",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"vaults",
+						"aef5b699-1583-4c05-9305-8cde4ea61be1",
+						"documents",
+						"tag-group-definitions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get vault document type categories",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"lsit is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(6);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/vaults/aef5b699-1583-4c05-9305-8cde4ea61be1/document-type-categories",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"vaults",
+						"aef5b699-1583-4c05-9305-8cde4ea61be1",
+						"document-type-categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get document types for category",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(2);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/document-type-categories/36b0c244-efef-47a3-bc3b-b80097a2551d/document-types",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"document-type-categories",
+						"36b0c244-efef-47a3-bc3b-b80097a2551d",
+						"document-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tag group definitions for document type",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(2);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/document-types/dff171df-2936-49b7-9358-e56dbc528ee7/tag-group-definitions",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"document-types",
+						"dff171df-2936-49b7-9358-e56dbc528ee7",
+						"tag-group-definitions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tag definitions of the tag group definition",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"object is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(Object.keys(jsonData).length).to.eql(6);",
+						"    pm.expect(jsonData.dateDefinitions.length).to.eql(1);",
+						"    pm.expect(jsonData.singleLineStringDefinitions.length).to.eql(1);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/tag-group-definitions/8099a7f3-cf13-4bee-b643-573a6f31cdcc/tag-definitions",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"tag-group-definitions",
+						"8099a7f3-cf13-4bee-b643-573a6f31cdcc",
+						"tag-definitions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update single line string tag",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(204);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "PUT",
+				"header": [{
+					"key": "Content-Type",
+					"value": "application/json"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "\"test\""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/tags/single-line-strings/7ef5a606-f362-425b-bfa2-d25faed44523",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"tags",
+						"single-line-strings",
+						"7ef5a606-f362-425b-bfa2-d25faed44523"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update date tag",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(204);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "PUT",
+				"header": [{
+					"key": "Content-Type",
+					"value": "application/json"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "\"2018-01-01T00:00:00Z\""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/tags/dates/84115427-acf1-43a3-b5b2-f1511791aee6",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"tags",
+						"dates",
+						"84115427-acf1-43a3-b5b2-f1511791aee6"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update number tag",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(204);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "PUT",
+				"header": [{
+					"key": "Content-Type",
+					"value": "application/json"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "20000"
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/tags/numbers/77a0173b-6692-4cea-b73e-a379a22c3770",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"tags",
+						"numbers",
+						"77a0173b-6692-4cea-b73e-a379a22c3770"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update selection tag",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"id": "341505d8-2387-4052-be6d-a1b05e1d788f",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(204);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "PUT",
+				"header": [{
+					"key": "Content-Type",
+					"value": "application/json"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    \"07144297-fc43-e911-b526-00155db2d916\"\n]"
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/tags/selections/715BD21C-413A-45D0-85EE-095CA9F664E5",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"tags",
+						"selections",
+						"715BD21C-413A-45D0-85EE-095CA9F664E5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Init search",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(201);",
+						"    var loc = postman.getResponseHeader(\"Location\");",
+						"    pm.expect(loc.length).to.eql(53);",
+						"    postman.setEnvironmentVariable(\"mysearchroute\", loc);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "POST",
+				"header": [{
+					"key": "Content-Type",
+					"value": "application/json"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"SearchText\": \"rechnung\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/search",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"search"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get search information",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"pm.test(\"totalcount not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.totalCount).to.eql(22);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/{{mysearchroute}}",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"{{mysearchroute}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get search results",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(10);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/{{mysearchroute}}/results?count=10&includeTags=true",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"{{mysearchroute}}",
+						"results"
+					],
+					"query": [{
+							"key": "count",
+							"value": "10",
+							"equals": true
+						},
+						{
+							"key": "includeTags",
+							"value": "true",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Init avanced search",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(201);",
+						"    var loc = postman.getResponseHeader(\"Location\");",
+						"    pm.expect(loc.length).to.eql(62);",
+						"    postman.setEnvironmentVariable(\"myadvancedsearchroute\", loc);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "POST",
+				"header": [{
+					"key": "Content-Type",
+					"value": "application/json"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"VaultIds\": [\"aef5b699-1583-4c05-9305-8cde4ea61be1\"],\n\t\"Condition\": {\n\t\t\"Type\": \"ConditionGroup\",\n\t\t\"Operator\": \"Or\",\n\t\t\"SubConditions\": [{\n\t\t\t\"Type\": \"StringEqualsCondition\",\n\t\t\t\"TagDefinitionIds\": [\"203aed4b-fb8d-4ab3-a2d4-c368ac6907d0\"],\n\t\t\t\"Value\": \"pdf\"\n\t\t},\n\t\t{\n\t\t\t\"Type\": \"StringEqualsCondition\",\n\t\t\t\"TagDefinitionIds\": [\"203aed4b-fb8d-4ab3-a2d4-c368ac6907d0\"],\n\t\t\t\"Value\": \"docx\"\n\t\t}]\n\t},\n\t\"SortInformation\": {\n\t\t\"TagDefinitionId\": \"223715b9-c04b-4235-b7bb-8c727b19d419\",\n\t\t\"Order\": \"Descending\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/advanced-search",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"advanced-search"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get advanced search information",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"pm.test(\"totalcount not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.totalCount).to.eql(44);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/{{myadvancedsearchroute}}",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"{{myadvancedsearchroute}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get advanced search results",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(10);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/{{myadvancedsearchroute}}/results?count=10&includeTags=true",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"{{myadvancedsearchroute}}",
+						"results"
+					],
+					"query": [{
+							"key": "count",
+							"value": "10",
+							"equals": true
+						},
+						{
+							"key": "includeTags",
+							"value": "true",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get sub magnets",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(6);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/magnets/0fedbcc5-b364-4214-bcc9-f0c04d470d56/magnets",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"magnets",
+						"0fedbcc5-b364-4214-bcc9-f0c04d470d56",
+						"magnets"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get vaults",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(1);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/vaults",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"vaults"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get vault magnets",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(18);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/vaults/aef5b699-1583-4c05-9305-8cde4ea61be1/magnets",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"vaults",
+						"aef5b699-1583-4c05-9305-8cde4ea61be1",
+						"magnets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get vault documents",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(23);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/vaults/aef5b699-1583-4c05-9305-8cde4ea61be1/documents?includeTags=true&count=30&offset=30",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"vaults",
+						"aef5b699-1583-4c05-9305-8cde4ea61be1",
+						"documents"
+					],
+					"query": [{
+							"key": "includeTags",
+							"value": "true"
+						},
+						{
+							"key": "count",
+							"value": "30"
+						},
+						{
+							"key": "offset",
+							"value": "30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get magnet documents",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(1);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/magnets/ab740efe-8f79-4979-9ee2-168d74c46c27/documents",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"magnets",
+						"ab740efe-8f79-4979-9ee2-168d74c46c27",
+						"documents"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get content orig",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/a620363c-bff0-42e1-a634-f2de38c9cb24/file",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"a620363c-bff0-42e1-a634-f2de38c9cb24",
+						"file"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get content PDF",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/a620363c-bff0-42e1-a634-f2de38c9cb24/pdf",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"a620363c-bff0-42e1-a634-f2de38c9cb24",
+						"pdf"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get content annotated PDF",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/a620363c-bff0-42e1-a634-f2de38c9cb24/annotated-pdf",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"a620363c-bff0-42e1-a634-f2de38c9cb24",
+						"annotated-pdf"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get content preview",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/2285da45-e5d7-4776-b8bf-df1a3287d882/preview?page=1&size=Large",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"2285da45-e5d7-4776-b8bf-df1a3287d882",
+						"preview"
+					],
+					"query": [{
+							"key": "page",
+							"value": "1",
+							"equals": true
+						},
+						{
+							"key": "size",
+							"value": "Large",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get content details",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"object is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(Object.keys(jsonData).length).to.eql(14);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/2285da45-e5d7-4776-b8bf-df1a3287d882",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"2285da45-e5d7-4776-b8bf-df1a3287d882"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create magnet document",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(201);",
+						"    var loc = postman.getResponseHeader(\"Location\");",
+						"    pm.expect(loc.length).to.eql(46);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "POST",
+				"header": [{
+					"key": "Content-Type",
+					"value": "application/json"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Metadata\":\r\n  {\r\n  \t\"CreateDate\": \"2018-11-18T15:28:23.101Z\",\r\n  \t\"ChangeDate\": \"2018-11-18T15:28:23.101Z\",\r\n  \t\"Name\": \"test.txt\",\r\n  \t\"Size\": 1\r\n  } \r\n}"
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/magnets/14e10c05-f148-4221-b78a-9efc75beb2f4/documents",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"magnets",
+						"14e10c05-f148-4221-b78a-9efc75beb2f4",
+						"documents"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create vault document",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(201);",
+						"    var loc = postman.getResponseHeader(\"Location\");",
+						"    pm.expect(loc.length).to.eql(46);",
+						"    postman.setEnvironmentVariable(\"myvaultdocumentroute\", loc);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "POST",
+				"header": [{
+					"key": "Content-Type",
+					"value": "application/json"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"metadata\":\r\n  {\r\n  \t\"createDate\": \"2018-11-18T15:28:23.101Z\",\r\n  \t\"changeDate\": \"2018-11-18T15:28:23.101Z\",\r\n  \t\"name\": \"1.txt\",\r\n  \t\"size\": 1\r\n  },\r\n  \"typeData\": {\r\n    \"documentTypeId\": \"6b2771af-f105-4666-bddf-ec19eff1dc36\",\r\n    \"singleLineStrings\": [\r\n      {\r\n        \"id\": \"5c95977e-3bce-4b5e-9f11-5d6d7fef2023\",\r\n        \"value\": \"Some name\"\r\n      }\r\n    ],\r\n    \"numbers\": [\r\n      {\r\n        \"id\": \"e23a919c-b9ee-43b4-9db1-68948650e407\",\r\n        \"value\": 500000\r\n      }\r\n    ]\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/vaults/aef5b699-1583-4c05-9305-8cde4ea61be1/documents",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"vaults",
+						"aef5b699-1583-4c05-9305-8cde4ea61be1",
+						"documents"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update document file",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(204);",
+						"});"
+					]
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "PUT",
+				"header": [{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Amagno-File-Create-Date",
+						"value": "2018-02-27T11:00:00.023Z"
+					},
+					{
+						"key": "Amagno-File-Change-Date",
+						"value": "2018-02-27T13:00:00.023Z"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [{
+						"key": "",
+						"description": "",
+						"type": "file",
+						"src": "Resources/test.txt"
+					}]
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/{{myvaultdocumentroute}}/file",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"{{myvaultdocumentroute}}",
+						"file"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create document assignment",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(201);",
+						"    var loc = postman.getResponseHeader(\"Location\");",
+						"    pm.globals.set(\"assignmentLocation\", loc);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "POST",
+				"header": [{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"type": "text"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"parentDocId\": \"35edc571-228a-4213-8a62-b487754c3b98\",\r\n  \"childDocId\": \"61359c4c-e6d5-43ca-9d98-ae6ccdc8ec33\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/assignments",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"assignments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get assignment",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"object is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(Object.keys(jsonData).length).to.eql(4);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"type": "text",
+					"value": "application/json"
+				}],
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/{{assignmentLocation}}",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"{{assignmentLocation}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get assignments",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.userDefinedAssignments.length).to.eql(1);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"type": "text",
+					"value": "application/json"
+				}],
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/35edc571-228a-4213-8a62-b487754c3b98/assignments",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"35edc571-228a-4213-8a62-b487754c3b98",
+						"assignments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create tag group for Document",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"id": "07694dfe-b1d3-4cc9-979a-5946e69823b0",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(201);",
+						"    var loc = postman.getResponseHeader(\"Location\");",
+						"    pm.expect(loc.length).to.eql(47);",
+						"    pm.globals.set(\"tagGroupLocation\", loc);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "POST",
+				"header": [{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"type": "text"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tagGroupDefinitionId\": \"d1ded66d-958b-4644-bca9-0cf36c9d326a\",\n    \"singleLineStrings\": [\n        {\n            \"tagDefinitionId\": \"b20899c6-fe43-e911-b526-00155db2d916\",\n            \"value\": \"Durchführung Schwertransport\"\n        }\n    ],\n    \"dates\": [\n        {\n            \"tagDefinitionId\": \"642df8d1-fe43-e911-b526-00155db2d916\",\n            \"value\": \"2015-03-12T00:00:00.000Z\"\n        }\n    ],\n    \"numbers\": [\n        {\n            \"tagDefinitionId\": \"a79a98dc-fe43-e911-b526-00155db2d916\",\n            \"value\": 1\n        }\n    ],\n    \"selections\": [\n        {\n            \"tagDefinitionId\": \"1dfe46ea-fe43-e911-b526-00155db2d916\",\n            \"value\": [\n                \"1ffe46ea-fe43-e911-b526-00155db2d916\"\n            ]\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/35edc571-228a-4213-8a62-b487754c3b98/tag-groups",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"35edc571-228a-4213-8a62-b487754c3b98",
+						"tag-groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tag groups from document",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"id": "4385553c-f199-467c-86ca-96cdec530880",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(1);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/057e89b7-92fc-48a2-9ca5-84b130ae0c72/tag-groups",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"057e89b7-92fc-48a2-9ca5-84b130ae0c72",
+						"tag-groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tag group",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"id": "2acbac81-b441-4394-bcd8-fc73b74c9e63",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"object is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(Object.keys(jsonData).length).to.eql(3);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/tag-groups/c0dcc62a-e244-e911-b526-00155db2d916",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"tag-groups",
+						"c0dcc62a-e244-e911-b526-00155db2d916"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tag group tags",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"id": "5bd751ae-bd12-4ef4-9ddc-d733c51e34bd",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"object is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(Object.keys(jsonData).length).to.eql(6);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/tag-groups/c0dcc62a-e244-e911-b526-00155db2d916/tags",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"tag-groups",
+						"c0dcc62a-e244-e911-b526-00155db2d916",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check out document to revert",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(201);",
+						"    var loc = postman.getResponseHeader(\"Location\");",
+						"    pm.expect(loc.length).to.eql(58);",
+						"    pm.globals.set(\"checkOutLocation\", loc);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/a620363c-bff0-42e1-a634-f2de38c9cb24/check-out",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"a620363c-bff0-42e1-a634-f2de38c9cb24",
+						"check-out"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get checked out document",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"object is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(Object.keys(jsonData).length).to.eql(14);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/{{checkOutLocation}}?includeTags=true",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"{{checkOutLocation}}"
+					],
+					"query": [{
+						"key": "includeTags",
+						"value": "true"
+					}]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all checked out documents",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(1);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/checked-out-documents?includeTags=true",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"checked-out-documents"
+					],
+					"query": [{
+						"key": "includeTags",
+						"value": "true"
+					}]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get vault checked out documents",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"list is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(jsonData.length).to.eql(1);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/vaults/aef5b699-1583-4c05-9305-8cde4ea61be1/checked-out-documents?includeTags=true",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"vaults",
+						"aef5b699-1583-4c05-9305-8cde4ea61be1",
+						"checked-out-documents"
+					],
+					"query": [{
+						"key": "includeTags",
+						"value": "true"
+					}]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Revert check-out",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(204);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/{{checkOutLocation}}",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"{{checkOutLocation}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check out document to check in",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(201);",
+						"    var loc = postman.getResponseHeader(\"Location\");",
+						"    pm.expect(loc.length).to.eql(58);",
+						"    pm.globals.set(\"checkOutLocation\", loc);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/a620363c-bff0-42e1-a634-f2de38c9cb24/check-out",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"a620363c-bff0-42e1-a634-f2de38c9cb24",
+						"check-out"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check in",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(201);",
+						"    var loc = postman.getResponseHeader(\"Location\");",
+						"    pm.expect(loc.length).to.eql(46);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/{{checkOutLocation}}/check-in",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"{{checkOutLocation}}",
+						"check-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create vault",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(201);",
+						"    var loc = postman.getResponseHeader(\"Location\");",
+						"    pm.expect(loc.length).to.eql(43);",
+						"    pm.globals.set(\"vaultLocation\", loc);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "POST",
+				"header": [{
+					"key": "Content-Type",
+					"value": "application/json"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"New vault\"\r\n}"
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/vaults",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"vaults"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get vault",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"object is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(Object.keys(jsonData).length).to.eql(2);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/{{vaultLocation}}",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"{{vaultLocation}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Copy vault",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(201);",
+						"    var loc = postman.getResponseHeader(\"Location\");",
+						"    pm.expect(loc.length).to.eql(43);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "POST",
+				"header": [{
+					"key": "Content-Type",
+					"value": "application/json"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Copy of new vault\",\r\n  \"copyDocuments\": true,\r\n  \"copyMembers\": true,\r\n  \"recreateWeblinks\": true,\r\n  \"copyEmailSettings\": true\r\n}"
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/{{vaultLocation}}/copy",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"{{vaultLocation}}",
+						"copy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"id": "99ffde48-c55e-4498-b37a-c760f2ddf238",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(201);",
+						"    var loc = postman.getResponseHeader(\"Location\");",
+						"    pm.expect(loc.length).to.eql(42);",
+						"    pm.globals.set(\"userLocation\", loc);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "POST",
+				"header": [{
+					"key": "Content-Type",
+					"name": "Content-Type",
+					"value": "application/json",
+					"type": "text"
+				}],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Email\": \"test@cleanpower.ag\",\n    \"FullName\": \"Max Mustermann\",\n    \"Quota\": 300,\n    \"Password\": \"hannes\",\n    \"Type\": \"Normal\"\n}"
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/users",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"event": [{
+				"listen": "test",
+				"script": {
+					"id": "8f0c48f4-1c94-4fd8-9c75-8fb8323b51e1",
+					"exec": [
+						"pm.test(\"response is ok\", function () {",
+						"    pm.response.to.have.status(200);",
+						"});",
+						"",
+						"pm.test(\"object is not empty\", function() {",
+						"    var jsonData = pm.response.json();",
+						"    pm.expect(Object.keys(jsonData).length).to.eql(4);",
+						"});"
+					],
+					"type": "text/javascript"
+				}
+			}],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [{
+						"key": "token",
+						"value": "{{mytoken}}",
+						"type": "string"
+					}]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/{{userLocation}}",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"{{userLocation}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get trashed document",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2934c138-f710-4e30-8f64-9ef0bd1ad21e",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"object is not empty\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(Object.keys(jsonData).length).to.eql(14);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{mytoken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/trashed-documents/5e295ab0-ea60-e911-b523-00155db2d916?includeTags=true",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"trashed-documents",
+						"5e295ab0-ea60-e911-b523-00155db2d916"
+					],
+					"query": [
+						{
+							"key": "includeTags",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get vault trashed documents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e5b399f-0bde-4188-94f9-073d0dddbc8e",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"object is not empty\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(Object.keys(jsonData).length).to.eql(2);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{mytoken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/vaults/aef5b699-1583-4c05-9305-8cde4ea61be1/trashed-documents?includeTags=true&count=10&offset=0",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"vaults",
+						"aef5b699-1583-4c05-9305-8cde4ea61be1",
+						"trashed-documents"
+					],
+					"query": [
+						{
+							"key": "includeTags",
+							"value": "true"
+						},
+						{
+							"key": "count",
+							"value": "10"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get trashed documents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e1af0ae5-269e-40ca-8507-b0a288892d02",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"object is not empty\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(Object.keys(jsonData).length).to.eql(2);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{mytoken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/trashed-documents?includeTags=true&count=10&offset=0",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"trashed-documents"
+					],
+					"query": [
+						{
+							"key": "includeTags",
+							"value": "true"
+						},
+						{
+							"key": "count",
+							"value": "10"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete trashed document",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4251d47e-bcd1-491d-90e9-b4b7c8ca8c0e",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{mytoken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/trashed-documents/5e295ab0-ea60-e911-b523-00155db2d916",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"trashed-documents",
+						"5e295ab0-ea60-e911-b523-00155db2d916"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trash document",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b30e488-6e39-4a1a-a4e8-73781975b8de",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    var loc = postman.getResponseHeader(\"Location\");",
+							"    pm.expect(loc.length).to.eql(54);",
+							"    pm.globals.set(\"trashedDocumentLocation\", loc);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{mytoken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{myhost}}/amagnome/api/v2/documents/9d5b7b12-8bb4-4317-b1f7-2dfc9ef809d9/trash",
+					"protocol": "http",
+					"host": [
+						"{{myhost}}"
+					],
+					"path": [
+						"amagnome",
+						"api",
+						"v2",
+						"documents",
+						"9d5b7b12-8bb4-4317-b1f7-2dfc9ef809d9",
+						"trash"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
